@@ -8,6 +8,9 @@ module.exports = {
       errors: true
     }
   },
+  transpileDependencies: [
+    'vuetify'
+  ],
   chainWebpack: config => {
     config.module
       .rule('graphql')

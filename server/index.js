@@ -16,6 +16,6 @@ server.use(logger);
 connection.once('open', () => {
     console.log('Connected to MongoDB');
     server.listen(port, () => {
-        console.log(`PCWS server online on http://localhost:${port}`);
+        console.log(`http://localhost:${port}`);
     });
 });
