@@ -1,7 +1,13 @@
 <template>
   <v-app>
     <v-app-bar app>
-      header
+      <v-toolbar-title>Сравнение цен</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text>
+        <v-icon left>mdi-login</v-icon>
+        <span>Войти</span>
+      </v-btn>
+
     </v-app-bar>
     <v-content>
       <v-container>
