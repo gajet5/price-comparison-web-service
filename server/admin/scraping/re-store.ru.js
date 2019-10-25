@@ -38,21 +38,3 @@ module.exports = async (url) => {
     await nightmare.end();
     console.log(result);
 };
-
-(async (url = 'https://www.re-store.ru/apple-iphone/iphone-11/') => {
-    await nightmare.goto(url).wait('div.catalog-item.with-heart.ddl_product');
-
-    let currentHeight = 0;
-    let previousHeight = -1;
-
-    while (previousHeight !== currentHeight) {
-        previousHeight = currentHeight;
-
-        currentHeight = await nightmare.evaluate(() => document.body.scrollHeight);
-        await nightmare.scrollTo(currentHeight, 0).wait(3000);
-    }
-
-    const result = getData(await nightmare.evaluate(() => document.querySelector('.catalog-items').innerHTML));
-    await nightmare.end();
-    console.log(result);
-})();
