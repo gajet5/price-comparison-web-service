@@ -1,7 +1,7 @@
 .idea
 node_modules
 dist
-public
-config
+
+server/config/index.js
 
 package-lock.json

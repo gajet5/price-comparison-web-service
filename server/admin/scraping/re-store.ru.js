@@ -9,7 +9,7 @@ function getData(html) {
     const items = $('.catalog-item');
 
     for (let i = 0; i < items.length; i += 1) {
-        const title = $(items[i]).find('a.item-title > span.clamp').text()
+        const title = $(items[i]).find('a.item-title > span.clamp').text();
 
         data.push({
             title,
