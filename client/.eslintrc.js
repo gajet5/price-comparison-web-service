@@ -11,8 +11,11 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     semi: [ 2, 'always' ],
-    "indent": [2, 2, { "SwitchCase": 1 }],
-    'vue/script-indent': [2, 2, { switchCase: 1 }],
+    indent: 'off',
+    'vue/script-indent': ['error', 2, {
+      baseIndent: 1,
+      switchCase: 1
+    }],
     'vue/no-unused-components': 0,
     'space-before-function-paren': ['error', {
       anonymous: 'never',

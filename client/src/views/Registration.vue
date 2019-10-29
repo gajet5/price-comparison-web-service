@@ -83,7 +83,7 @@
         if (!this.password || !this.rePassword) {
           return false;
         }
-        this.$refs.registrationForm.validate();
+        this.$refs['registrationForm'].validate();
       },
       async submit() {
         let result;
@@ -99,7 +99,11 @@
         } catch (e) {
           console.log(e);
         }
-        console.log(result);
+        if (result.data.status === 'success') {
+          this.$refs['registrationForm'].reset();
+        } else {
+          console.log(result.data);
+        }
       }
     }
   };
