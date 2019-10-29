@@ -20,7 +20,7 @@ passport(server);
 
 server.all('/', (req, res) => res.send('Welcome to backend.'));
 server.use('/api', api);
-server.use('/admin', passport.authenticate, admin);
+server.use('/admin', admin);
 
 connection.once('open', () => {
     console.log('Connected to MongoDB');

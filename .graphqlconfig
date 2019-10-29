@@ -1,0 +1,17 @@
+{
+  "name": "Price comparison",
+  "includes": [
+    "*.graphql"
+  ],
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:3000/api",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

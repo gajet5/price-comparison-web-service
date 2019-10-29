@@ -7,22 +7,34 @@
         <v-icon left>mdi-login</v-icon>
         <span>Войти</span>
       </v-btn>
+      <v-btn text v-show="canRegistration" to="registration">
+        <v-icon left>mdi-account-plus-outline</v-icon>
+        <span>Регистрация</span>
+      </v-btn>
 
     </v-app-bar>
     <v-content>
-      <v-container>
-        <v-row>
-          <v-col md12>
-            main
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view></router-view>
     </v-content>
     <v-footer app>
       footer
     </v-footer>
   </v-app>
 </template>
+
+<script>
+  export default {
+    name: 'App',
+    data() {
+      return {};
+    },
+    computed: {
+      canRegistration() {
+        return localStorage.getItem('registration') === 'true';
+      }
+    }
+  };
+</script>
 
 <style>
 

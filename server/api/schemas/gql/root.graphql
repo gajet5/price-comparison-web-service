@@ -1,0 +1,12 @@
+schema {
+    query: Query,
+    mutation: Mutations
+}
+
+type Query {
+    getRoot: String
+}
+
+type Mutations {
+    setRoot: String
+}
