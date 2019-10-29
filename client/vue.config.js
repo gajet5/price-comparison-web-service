@@ -17,6 +17,6 @@ module.exports = {
       .test(/\.graphql$/)
       .use('graphql-tag/loader')
       .loader('graphql-tag/loader')
-      .end()
+      .end();
   }
 };

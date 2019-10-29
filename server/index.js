@@ -23,8 +23,8 @@ server.use('/api', api);
 server.use('/admin', admin);
 
 connection.once('open', () => {
-    console.log('Connected to MongoDB');
-    server.listen(port, () => {
-        console.log(`http://localhost:${port}`);
-    });
+  console.log('Connected to MongoDB');
+  server.listen(port, () => {
+    console.log(`http://localhost:${port}`);
+  });
 });

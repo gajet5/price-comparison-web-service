@@ -1,0 +1,3 @@
+extend type Mutations {
+    createUser(email: String!, password: String!): Result
+}

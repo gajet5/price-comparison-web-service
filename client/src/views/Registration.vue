@@ -30,7 +30,9 @@
                 required
               ></v-text-field>
               <div class="text-center mt-3">
-                <v-btn :disabled="!registrationFormValid" @click="submit" text outlined color="success">Зарегистрироваться</v-btn>
+                <v-btn :disabled="!registrationFormValid" @click="submit" text outlined color="success">
+                  Зарегистрироваться
+                </v-btn>
               </div>
             </v-form>
           </v-card-text>
@@ -42,6 +44,7 @@
 
 <script>
   import textFieldRules from '@/helpers/textFieldRules';
+  import gql from 'graphql-tag';
 
   export default {
     name: 'Registration',
@@ -82,8 +85,21 @@
         }
         this.$refs.registrationForm.validate();
       },
-      submit() {
+      async submit() {
+        let result;
 
+        try {
+          result = await this.$apollo.mutate({
+            mutation: gql`${require('@/gql/createUser.graphql')}`,
+            variables: {
+              email: this.email,
+              password: this.password
+            }
+          });
+        } catch (e) {
+          console.log(e);
+        }
+        console.log(result);
       }
     }
   };
