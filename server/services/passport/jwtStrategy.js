@@ -8,9 +8,9 @@ const options = {
 };
 
 module.exports = passport => {
-  passport.use(new Strategy(options, async (jwt, done) => {
+  passport.use(new Strategy(options, async (payload, done) => {
     try {
-      const user = await usersModel.findById(jwt.id);
+      const user = await usersModel.findById(payload.id);
       if (!user) return done(null, false);
       done(null, user);
     } catch (e) {

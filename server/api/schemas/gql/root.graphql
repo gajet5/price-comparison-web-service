@@ -12,6 +12,6 @@ type Mutations {
 }
 
 type Result {
-    status: String,
-    message: String
+    status: String!,
+    message: String!
 }

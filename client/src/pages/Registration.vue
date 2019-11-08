@@ -3,7 +3,7 @@
     <v-row align="center" justify="center">
       <v-col md="6">
         <v-card>
-          <v-card-title>
+          <v-card-title class="d-flex flex-column justify-start align-start">
             <h2>Регистрация</h2>
             <small class="subtitle-2 grey--text font-weight-light">Добавление административной учётной записи</small>
           </v-card-title>

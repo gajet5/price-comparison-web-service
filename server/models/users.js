@@ -16,8 +16,18 @@ const Users = new mongoose.Schema({
   },
   salt: {
     type: String
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'user'],
+    default: 'user'
   }
 });
+
+Users.virtual('isAdmin')
+  .get(function() {
+    return this.role === 'admin';
+  });
 
 Users.methods.validatePassword = function(password) {
   const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('hex');

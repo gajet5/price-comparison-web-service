@@ -1,3 +1,11 @@
+extend type Query {
+    loginUser(email: String!, password: String!): Result
+}
+
 extend type Mutations {
     createUser(email: String!, password: String!): Result
+}
+
+extend type Result {
+    jwt: String
 }

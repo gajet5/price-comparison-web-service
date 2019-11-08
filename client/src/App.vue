@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title>Сравнение цен</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text>
+      <v-btn text to="login" class="mr-3">
         <v-icon left>mdi-login</v-icon>
         <span>Войти</span>
       </v-btn>

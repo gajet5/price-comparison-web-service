@@ -6,9 +6,17 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 Vue.use(VueApollo);
 
+function getAuthHeader() {
+  const token = localStorage.getItem('jwt');
+  return token ? { authorization: `Bearer ${token}` } : false;
+}
+
+const headers = { ...getAuthHeader() };
+
 const apolloClient = new ApolloClient({
   link: createHttpLink({
-    uri: `http://${location.hostname}:3000/api`
+    uri: `http://${location.hostname}:3000/api`,
+    headers
   }),
   cache: new InMemoryCache(),
   defaultOptions: {
