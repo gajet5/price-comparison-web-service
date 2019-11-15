@@ -1,17 +1,14 @@
 const express = require('express');
 const graphqlMiddleware = require('express-graphql');
-
-const schema = require('./schemas');
-const rootValue = require('./resolvers');
+const path = require('path');
+const resolversLoader = require('../helpers/resolversLoader');
 
 const admin = express();
 
 admin.all('/', graphqlMiddleware({
   graphiql: true,
-  schema,
-  rootValue
+  schema: require('./schemas'),
+  rootValue: resolversLoader(path.join(__dirname, 'resolvers'))
 }));
-
-admin.all('/', (req, res) => res.send('Admin'));
 
 module.exports = admin;
