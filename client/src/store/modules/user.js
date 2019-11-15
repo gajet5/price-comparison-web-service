@@ -4,18 +4,14 @@ import { apolloClient } from '@/plugins/apollo';
 export default {
   namespaced: true,
   state: {
-    token: null,
-    loggedIn: false
+    token: localStorage.getItem('userSession') || null
   },
   getters: {
-    token(state) {
-      return state.token;
+    loggedIn(state) {
+      return !!state.token;
     }
   },
   mutations: {
-    setLoggedIn(state, status) {
-      state.loggedIn = status;
-    },
     setToken(state, token) {
       state.token = token;
     }
@@ -30,15 +26,7 @@ export default {
       });
         console.log(tokenValidate);
     },
-    tryIdentifyUser(ctx) {
-      const token = localStorage.getItem('userSession');
-      if (token) {
-        ctx.commit('setToken', token);
-        ctx.commit('setLoggedIn', true);
-      }
-    },
     saveToken(ctx, token) {
-      ctx.commit('setLoggedIn', true);
       localStorage.setItem('userSession', token);
     }
   }

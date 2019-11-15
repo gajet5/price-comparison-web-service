@@ -74,6 +74,7 @@
 
         if (result.data.loginUser.status === 'success') {
           this.$refs['loginForm'].reset();
+          this.$router.push('admin');
           await this.$store.dispatch('user/saveToken', result.data.loginUser.jwt);
         } else {
           console.log(result.data);

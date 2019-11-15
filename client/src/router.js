@@ -5,6 +5,8 @@ import Registration from '@/pages/Registration';
 import Login from '@/pages/Login';
 import Admin from '@/pages/Admin';
 
+import store from '@/store';
+
 Vue.use(Router);
 
 export default new Router({
@@ -24,7 +26,14 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: Admin
+      component: Admin,
+      beforeEnter(to, from, next) {
+        if (store.getters['user/loggedIn']) {
+          return next();
+        } else {
+          return next('login');
+        }
+      }
     }
   ]
 });

@@ -24,9 +24,6 @@
 
 <script>
   export default {
-    async beforeMount() {
-      await this.$store.dispatch('user/tryIdentifyUser');
-    },
     name: 'App',
     data() {
       return {};
