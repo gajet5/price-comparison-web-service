@@ -1,5 +1,6 @@
 extend type Query {
     loginUser(email: String!, password: String!): Result
+    tokenValidate(token: String!): Result
 }
 
 extend type Mutations {

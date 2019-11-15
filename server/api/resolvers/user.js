@@ -1,6 +1,6 @@
 const jsonwebtoken = require('jsonwebtoken');
 const userModel = require('../../models/users');
-const { jwtSecret } = require('../../config');
+const { jwt } = require('../../config');
 
 module.exports = {
   async createUser({ email, password }) {
@@ -36,7 +36,7 @@ module.exports = {
       return {
         status: 'success',
         message: 'Пользователь успешно создан.',
-        jwt: jsonwebtoken.sign({ id: user.id }, jwtSecret, { expiresIn: '1d' })
+        jwt: jsonwebtoken.sign({ id: user.id }, jwt.secret, { expiresIn: jwt.expiresIn })
       };
     } catch (e) {
       await user.remove();
@@ -78,7 +78,16 @@ module.exports = {
     return {
       status: 'success',
       message: 'Пользователь найден.',
-      jwt: jsonwebtoken.sign({ id: user.id }, jwtSecret, { expiresIn: '1d' })
+      jwt: jsonwebtoken.sign({ id: user.id }, jwt.secret, { expiresIn: jwt.expiresIn })
+    };
+  },
+
+  async tokenValidate({ token }) {
+    const result = jsonwebtoken.verify(token, jwt.secret);
+    console.log(result);
+    return {
+      status: 'test',
+      message: 'Some messages'
     };
   }
 };

@@ -7,12 +7,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 Vue.use(VueApollo);
 
 function getAuthHeader() {
-  const token = localStorage.getItem('jwt');
+  const token = localStorage.getItem('userSession');
   return token ? { authorization: `Bearer ${token}` } : false;
 }
 
 const headers = { ...getAuthHeader() };
 
+// todo: Вынести в конфиг uri
 const apolloClient = new ApolloClient({
   link: createHttpLink({
     uri: `http://${location.hostname}:3000/api`,

@@ -99,8 +99,10 @@
         } catch (e) {
           console.log(e);
         }
-        if (result.data.status === 'success') {
+
+        if (result.data.createUser.status === 'success') {
           this.$refs['registrationForm'].reset();
+          await this.$store.dispatch('user/saveToken', result.data.createUser.jwt);
         } else {
           console.log(result.data);
         }
