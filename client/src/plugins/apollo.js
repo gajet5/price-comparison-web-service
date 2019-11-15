@@ -13,25 +13,31 @@ function getAuthHeader() {
 
 const headers = { ...getAuthHeader() };
 
-// todo: Вынести в конфиг uri
-const apolloClient = new ApolloClient({
+const apiClient = new ApolloClient({
   link: createHttpLink({
-    uri: `http://${location.hostname}:3000/api`,
+    uri: `http://${location.hostname}:${location.port ? 3000 : ''}/api`
+  }),
+  cache: new InMemoryCache()
+});
+
+const adminClient = new ApolloClient({
+  link: createHttpLink({
+    uri: `http://${location.hostname}:${location.port ? 3000 : ''}/admin`,
     headers
   }),
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    query: {
-      fetchPolicy: 'no-cache'
-    }
-  }
+  cache: new InMemoryCache()
 });
 
 const apolloProvider = new VueApollo({
-  defaultClient: apolloClient
+  defaultClient: apiClient,
+  clients: {
+    apiClient,
+    adminClient
+  }
 });
 
 export {
-  apolloClient,
+  apiClient,
+  adminClient,
   apolloProvider
 };

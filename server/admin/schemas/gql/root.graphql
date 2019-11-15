@@ -1,0 +1,17 @@
+schema {
+    query: Query,
+    mutation: Mutations
+}
+
+type Query {
+    root: String
+}
+
+type Mutations {
+    root: String
+}
+
+type Result {
+    status: String!,
+    message: String!
+}

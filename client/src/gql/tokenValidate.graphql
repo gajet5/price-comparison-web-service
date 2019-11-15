@@ -1,6 +1,0 @@
-query tokenValidate($token: String!) {
-    tokenValidate(token: $token) {
-        status,
-        message
-    }
-}

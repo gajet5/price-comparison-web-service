@@ -3,10 +3,12 @@ const graphqlMiddleware = require('express-graphql');
 
 const api = express();
 
-api.all('/', graphqlMiddleware({
+const graphqlMiddlewareInstance = graphqlMiddleware({
   graphiql: true,
   schema: require('./schemas'),
   rootValue: require('./resolvers')
-}));
+});
+
+api.all('/', graphqlMiddlewareInstance);
 
 module.exports = api;

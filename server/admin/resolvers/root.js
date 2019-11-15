@@ -1,5 +1,5 @@
 module.exports = {
   root() {
-    return 'rootAnonimus';
+    return 'rootAdmin';
   }
 };
