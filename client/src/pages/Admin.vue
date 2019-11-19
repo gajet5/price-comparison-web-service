@@ -7,11 +7,17 @@
 
   export default {
     async beforeMount() {
-      const result = await this.$apollo.query({
-        client: 'adminClient',
-        query: gql`${require('@/gql/root.graphql')}`
-      });
-      console.log(result);
+      try {
+        const result = await this.$apollo.query({
+          client: 'adminClient',
+          query: gql`${require('@/gql/root.graphql')}`
+        });
+        console.log(result);
+      } catch (e) {
+        console.log(e);
+        await this.$store.dispatch('user/logout');
+        await this.$router.push('/');
+      }
     },
     name: 'Admin'
   };

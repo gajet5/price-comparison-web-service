@@ -80,14 +80,5 @@ module.exports = {
       message: 'Пользователь найден.',
       jwt: jsonwebtoken.sign({ id: user.id }, jwt.secret, { expiresIn: jwt.expiresIn })
     };
-  },
-
-  async tokenValidate({ token }) {
-    const result = jsonwebtoken.verify(token, jwt.secret);
-    console.log(result);
-    return {
-      status: 'test',
-      message: 'Some messages'
-    };
   }
 };
