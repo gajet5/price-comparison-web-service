@@ -14,8 +14,13 @@ export default {
     }
   },
   actions: {
-    saveToken(ctx, token) {
+    login({ commit }, token) {
       localStorage.setItem('userSession', token);
+      commit('setToken', token);
+    },
+    logout({ commit }) {
+      localStorage.removeItem('userSession');
+      commit('setToken', null);
     }
   }
 };

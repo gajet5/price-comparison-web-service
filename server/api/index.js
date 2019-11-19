@@ -1,3 +1,5 @@
+// Todo: Рефакторинг, одинаковый код.
+
 const express = require('express');
 const graphqlMiddleware = require('express-graphql');
 const path = require('path');

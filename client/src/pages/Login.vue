@@ -8,7 +8,7 @@
             <small class="subtitle-2 grey--text font-weight-light">Войти в учётную запись</small>
           </v-card-title>
           <v-card-text>
-            <v-form ref="loginForm" v-model="loginFormValid">
+            <v-form ref="loginForm" v-model="loginFormValid" @submit.prevent="">
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -23,11 +23,21 @@
                 required
               ></v-text-field>
               <div class="text-center mt-3">
-                <v-btn :disabled="!loginFormValid" @click="submit" text outlined color="success">
+                <v-btn type="submit" :disabled="!loginFormValid" @click="submit" text outlined color="success">
                   Войти
                 </v-btn>
               </div>
             </v-form>
+          </v-card-text>
+          <v-card-text>
+            <v-alert
+              :value="alert"
+              :type="alertType"
+              outlined
+              transition="scale-transition"
+            >
+              {{ alertMessage }}
+            </v-alert>
           </v-card-text>
         </v-card>
       </v-col>
@@ -43,6 +53,9 @@
     name: 'Login',
     data() {
       return {
+        alert: false,
+        alertType: 'info',
+        alertMessage: '',
         loginFormValid: true,
         email: null,
         emailRules: [
@@ -58,8 +71,11 @@
     },
     methods: {
       async submit() {
-        let result;
+        if (!this.loginFormValid && !this.email && !this.password) {
+          return false;
+        }
 
+        let result;
         try {
           result = await this.$apollo.query({
             query: gql`${require('@/gql/loginUser.graphql')}`,
@@ -74,10 +90,15 @@
 
         if (result.data.loginUser.status === 'success') {
           this.$refs['loginForm'].reset();
-          this.$router.push('admin');
-          await this.$store.dispatch('user/saveToken', result.data.loginUser.jwt);
+          await this.$store.dispatch('user/login', result.data.loginUser.jwt);
+          await this.$router.push('admin');
         } else {
-          console.log(result.data);
+          this.alert = true;
+          this.alertType = result.data.loginUser.status;
+          this.alertMessage = result.data.loginUser.message;
+          setTimeout(() => {
+            this.alert = false;
+          }, 1000 * 5);
         }
       }
     }
