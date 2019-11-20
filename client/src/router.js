@@ -40,6 +40,10 @@ export default new Router({
           return next('login');
         }
       }
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 });
