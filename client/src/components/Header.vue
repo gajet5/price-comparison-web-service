@@ -1,8 +1,16 @@
 <template>
   <v-app-bar app>
-    <v-toolbar-title>Сравнение цен</v-toolbar-title>
+    <v-toolbar-title>
+      <router-link to="/" class="black--text text-decoration-none">
+        <span>Сравнение цен</span>
+      </router-link>
+    </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn text to="login" class="mr-3" v-if="btnSignInBehavior">
+    <v-btn v-show="loggedIn" text to="admin" class="mr-3" >
+      <v-icon left>mdi-view-dashboard</v-icon>
+      <span>Админка</span>
+    </v-btn>
+    <v-btn text to="login" class="mr-3" v-if="!loggedIn">
       <v-icon left>mdi-login</v-icon>
       <span>Войти</span>
     </v-btn>
@@ -21,8 +29,8 @@
   export default {
     name: 'Header',
     computed: {
-      btnSignInBehavior() {
-        return !this.$store.getters['user/loggedIn'];
+      loggedIn() {
+        return this.$store.getters['user/loggedIn'];
       },
       canRegistration() {
         return localStorage.getItem('registration') === 'true';
@@ -38,5 +46,7 @@
 </script>
 
 <style scoped>
-
+  .text-decoration-none {
+    text-decoration: none;
+  }
 </style>
