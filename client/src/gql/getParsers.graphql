@@ -1,0 +1,6 @@
+query getParsers {
+    getParsers {
+        status,
+        parsers
+    }
+}

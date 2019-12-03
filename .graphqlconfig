@@ -5,10 +5,18 @@
   ],
   "extensions": {
     "endpoints": {
-      "Default GraphQL Endpoint": {
+      "apiClient": {
         "url": "http://localhost:3000/api",
         "headers": {
           "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      },
+      "adminClient": {
+        "url": "http://localhost:3000/admin",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "authorization": "Bearer "
         },
         "introspect": false
       }
