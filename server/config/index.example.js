@@ -3,6 +3,7 @@ module.exports = {
   mongodbUrl: '',
   jwt: {
     secret: '',
-    expiresIn: 10
-  }
+    expiresIn: '7d'
+  },
+  scanningFrequency: 1000 * 60 * 60 // in milliseconds
 };

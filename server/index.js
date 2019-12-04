@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const { port } = require('./config');
+const { port, scanningFrequency } = require('./config');
 const cors = require('cors');
 
 const { connection } = require('./services/db');
@@ -30,7 +30,7 @@ connection.once('open', () => {
   server.listen(port, () => {
     console.log(`http://localhost:${port}`);
   });
-  interval = setInterval(parserManager, 1000 * 10);
+  interval = setInterval(parserManager, scanningFrequency);
 });
 
 process.on('beforeExit', () => {
