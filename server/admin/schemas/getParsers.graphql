@@ -1,7 +1,3 @@
 extend type Query {
-    getParsers: Result
-}
-
-extend type Result {
-    parsers: [String]
+    getParsers: [String]
 }

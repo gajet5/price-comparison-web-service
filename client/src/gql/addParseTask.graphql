@@ -1,0 +1,6 @@
+mutation addParseTask($url: String!, $parser: String! $times: Int!) {
+    addParseTask(url: $url, parser: $parser, times: $times) {
+        message,
+        status
+    }
+}

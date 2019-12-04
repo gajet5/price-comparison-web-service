@@ -11,6 +11,7 @@
         </v-col>
         <v-col cols="3">
           <v-select
+            v-model="parserSelected"
             :items="parsers"
             label="Выбрать парсер"
           ></v-select>
@@ -50,17 +51,18 @@
 
   export default {
     async beforeMount() {
-      let { data: { getParsers: { parsers } } } = await this.$apollo.query({
+      let { data: { getParsers } } = await this.$apollo.query({
         client: 'adminClient',
         query: gql`${require('@/gql/getParsers.graphql')}`
       });
-      this.parsers = parsers;
+      this.parsers = getParsers;
     },
     name: 'AddSite',
     data() {
       return {
         url: '',
         timesSelected: null,
+        parserSelected: null,
         times: [
           {
             text: '1 в неделю',
@@ -74,8 +76,17 @@
       clearForm() {
         this.$refs.addParseUrlForm.reset();
       },
-      submit() {
-        console.log(this.url);
+      async submit() {
+        const result = await this.$apollo.mutate({
+          client: 'adminClient',
+          mutation: gql`${require('@/gql/addParseTask.graphql')}`,
+          variables: {
+            url: this.url,
+            parser: this.parserSelected,
+            times: this.timesSelected
+          }
+        });
+        console.log(result);
       }
     }
   };

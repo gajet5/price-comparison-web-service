@@ -1,0 +1,3 @@
+extend type Mutations {
+    addParseTask(url: String!, parser: String!, times: Int!): Result
+}

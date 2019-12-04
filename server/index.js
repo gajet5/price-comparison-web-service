@@ -6,12 +6,15 @@ const cors = require('cors');
 
 const { connection } = require('./services/db');
 const passport = require('./services/passport');
+const parserManager = require('./services/parseManager');
 
 const api = require('./api');
 const admin = require('./admin');
 
 const server = express();
 const logger = morgan('tiny');
+
+let interval;
 
 server.use(helmet());
 server.use(cors());
@@ -27,4 +30,9 @@ connection.once('open', () => {
   server.listen(port, () => {
     console.log(`http://localhost:${port}`);
   });
+  interval = setInterval(parserManager, 1000 * 10);
+});
+
+process.on('beforeExit', () => {
+  clearInterval(interval);
 });
