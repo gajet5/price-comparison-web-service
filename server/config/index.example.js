@@ -5,5 +5,5 @@ module.exports = {
     secret: '',
     expiresIn: '7d'
   },
-  scanningFrequency: 1000 * 60 * 60 // in milliseconds
+  scanningFrequency: 1000 * 60 // in milliseconds
 };

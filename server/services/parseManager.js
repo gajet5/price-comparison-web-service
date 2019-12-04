@@ -13,7 +13,7 @@ module.exports = async () => {
     if (nextScanTime < currentTime) {
       await siteParser(url);
       await parsers[i].updateOne({
-        nextScanTime: +moment(currentTime).add(`${times}w`)
+        nextScanTime: +moment().add(times, 'w')
       });
     }
   }
